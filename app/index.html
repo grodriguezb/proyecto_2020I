@@ -40,12 +40,34 @@ p {
   overflow: hidden;
   background-color: #f1f1f1;
 }
+
+input[type=text], select {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 10%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 </style>
 
 <body>
 <div align="Left">
 <h1 align="center">Comandos Basicos para Linux</h1>
-<p id="banner"></p>
+<h2><p id="banner"></p></h2>
 	<script>
 		function getName(){
 			var name = prompt("Bienvenido/a, cual es su nombre?");
@@ -63,10 +85,8 @@ p {
 	</script>
 </div>
 
-
 <input type="text" id="search_value" size="20" name="search_value"><br>
-<button onclick="search()">Buscar Comandos</button>
-<br>
+<button onclick="search()">Buscar Comandos</button><br>
 <p id="search_result_content"></p>
 
 
@@ -129,6 +149,33 @@ function collapse (){
 						ls -al listará los archivos y directorios con información detallada como los permisos, el tamaño, el propietario, etc.
 					</p>
 				</div>
+				<button type="button" class="collapsible">Comando mkdir</button>
+				<div class="content">
+					<p>
+						Usa el comando mkdir para crear un nuevo directorio: si escribes mkdir Musica, creará un directorio llamado Musica.<br>
+						También hay comandos adicionales de mkdir:<br>
+						Para generar un nuevo directorio dentro de otro directorio, usa este comando básico de Linux mkdir Musica/Nuevoarchivo<br>
+						Usa la opción p (padres) para crear un directorio entre dos directorios existentes. Por ejemplo, mkdir -p Musica/2020/Nuevoarchivo creará el nuevo archivo «2020».
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando rmdir</button>
+				<div class="content">
+					<p>
+						Si necesitas eliminar un directorio, usa el comando rmdir. Sin embargo, rmdir solo te permite eliminar directorios vacíos.
+					</p>
+				</div>
+				<button type="button" class="collapsible">comando rm</button>
+				<div class="content">
+					<p>
+						El comando rm se usa para eliminar directorios y el contenido dentro de ellos. Si solo deseas eliminar el directorio, como alternativa a rmdir, usa rm -r.<br>
+						<b>Nota:</b> Ten mucho cuidado con este comando y verifica en qué directorio te encuentras. Este comando elimina todo y no se puede deshacer.
+					</p>
+				</div>
+				`;
+				collapse();
+				break;
+			case 'archivos':  case 'archivo':
+				document.getElementById("search_result_content").innerHTML = `<p><b>Comandos para Archivos</b></p>
 				<button type="button" class="collapsible">Comando cat</button>
 				<div class="content">
 					<p>
@@ -148,15 +195,6 @@ function collapse (){
 						Por ejemplo, el comando cp escenario.jpg /home/nombredeusuario/Imagenes crearía una copia de escenario.jpg (desde tu directorio actual) en el directorio de Imagenes.
 					</p>
 				</div>
-				<button type="button" class="collapsible">Comando mkdir</button>
-				<div class="content">
-					<p>
-						Usa el comando mkdir para crear un nuevo directorio: si escribes mkdir Musica, creará un directorio llamado Musica.<br>
-						También hay comandos adicionales de mkdir:<br>
-						Para generar un nuevo directorio dentro de otro directorio, usa este comando básico de Linux mkdir Musica/Nuevoarchivo<br>
-						Usa la opción p (padres) para crear un directorio entre dos directorios existentes. Por ejemplo, mkdir -p Musica/2020/Nuevoarchivo creará el nuevo archivo «2020».
-					</p>
-				</div>
 				<button type="button" class="collapsible">Comando mv</button>
 				<div class="content">
 					<p>
@@ -165,17 +203,211 @@ function collapse (){
 						Para cambiar el nombre de los archivos, el comando de Linux es mv nombreviejo.ext nombrenuevo.ext
 					</p>
 				</div>
-				<button type="button" class="collapsible">Comando rmdir</button>
+				<button type="button" class="collapsible">Comando touch</button>
 				<div class="content">
 					<p>
-						Si necesitas eliminar un directorio, usa el comando rmdir. Sin embargo, rmdir solo te permite eliminar directorios vacíos.
+						El comando touch te permite crear un nuevo archivo en blanco a través de la línea de comando de Linux. <br>
+						Como ejemplo, ingresa touch /home/nombredeusuario/Documentos/Web.html para crear un archivo HTML titulado Web en el directorio Documentos.
 					</p>
 				</div>
-				<button type="button" class="collapsible">comando rm</button>
+				<button type="button" class="collapsible">Comando locate</button>
 				<div class="content">
 					<p>
-						El comando rm se usa para eliminar directorios y el contenido dentro de ellos. Si solo deseas eliminar el directorio, como alternativa a rmdir, usa rm -r.<br>
-						<b>Nota:</b> Ten mucho cuidado con este comando y verifica en qué directorio te encuentras. Este comando elimina todo y no se puede deshacer.
+						Puedes usar este comando para localizar un archivo, al igual que el comando de búsqueda en Windows. <br>
+						Además, el uso del argumento -i junto con este comando hará que no distinga entre mayúsculas y minúsculas, 
+						por lo que puedes buscar un archivo incluso si no recuerdas su nombre exacto. <br> Para buscar un archivo que contenga dos o más palabras, usa un asterisco (*). <br>
+						Por ejemplo, el comando locate -i escuela*nota buscará cualquier archivo que contenga la palabra «escuela» y «nota», ya sea en mayúsculas o minúsculas.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando find</button>
+				<div class="content">
+					<p>
+						Similar al comando locate, usando find también buscas archivos y directorios. <br>
+						La diferencia es que usas el comando find para ubicar archivos dentro de un directorio dado.<br>
+						Como ejemplo, el comando find /home/ -name notas.txt buscará un archivo llamado notas.txt dentro del directorio de inicio y sus subdirectorios.<br>
+						Otras variaciones al usar find son:<br>
+						-Para buscar archivos en el directorio actual, find . -name notas.txt<br>
+						-Para buscar directorios, / -type d -name notes.txt
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando grep</button>
+				<div class="content">
+					<p>
+						Otro comando básico de Linux que sin duda es útil para el uso diario es grep. <br>
+						Te permite buscar a través de todo el texto en un archivo dado. <br>
+						Para ilustrar, grep azul notepad.txt buscará la palabra azul en el archivo del bloc de notas. Las líneas que contienen la palabra buscada se mostrarán.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando head</button>
+				<div class="content">
+					<p>
+						El comando head se usa para ver las primeras líneas de cualquier archivo de texto. <br>
+						De manera predeterminada, mostrará las primeras diez líneas, pero puedes cambiar este número a tu gusto. <br>
+						Por ejemplo, si solo deseas mostrar las primeras cinco líneas, escribe head -n 5 nombredearchivo.ext.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando tail</button>
+				<div class="content">
+					<p>
+						Este tiene una función similar al comando head, pero en lugar de mostrar las primeras líneas, el comando tail mostrará las últimas diez líneas de un archivo de texto. <br>
+						Por ejemplo, tail -n nombredearchivo.ext.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando diff</button>
+				<div class="content">
+					<p>
+						Para abreviar diferencia, el comando diff compara el contenido de dos archivos línea por línea. <br>
+						Después de analizar los archivos, genera las líneas que no coinciden. <br>
+						Los programadores a menudo usan este comando cuando necesitan hacer modificaciones al programa en lugar de reescribir todo el código fuente. <br>
+						La forma más simple de usar este comando es diff archivo1.ext archivo2.ext
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando tar</button>
+				<div class="content">
+					<p>
+						El comando tar es el comando más utilizado para guardar múltiples archivos en un tarball, 
+						un formato de archivo de Linux común que es similar al formato zip, con compresión opcional. <br>
+						Este comando es bastante complejo con una larga lista de funciones, como agregar nuevos archivos a un archivo existente, 
+						enumerar el contenido de un archivo, extraer el contenido de un archivo y muchos más.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando echo</button>
+				<div class="content">
+					<p>
+						Este comando se usa para mover algunos datos a un archivo. <br>
+						Por ejemplo, si deseas agregar el texto «Hola, mi nombre es John» en un archivo llamado nombre.txt, debes escribir <b>echo Hola, mi nombre es John >> nombre.txt</b>
+					</p>
+				</div>
+				`;
+				collapse();
+				break;
+			case 'permisos': case 'permiso':
+				document.getElementById("search_result_content").innerHTML = `<p><b>Comandos para Permisos</b></p>
+				<button type="button" class="collapsible">Comando chmod</button>
+				<div class="content">
+					<p>
+						chmod es otro comando de Linux, utilizado para cambiar los permisos de lectura, 
+						escritura y ejecución de archivos y directorios. Como este comando es bastante complicado, 
+						puedes leer el tutorial completo (en inglés) para ejecutarlo correctamente.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando chown</button>
+				<div class="content">
+					<p>
+						En Linux, todos los archivos son propiedad de un usuario específico. El comando chown te permite cambiar o transferir la 
+						propiedad de un archivo al nombre de usuario especificado. <br> 
+						Por ejemplo, chown usuariolinux2 archivo.ext hará que usuariolinux2 sea el propietario del archivo.ext.
+					</p>
+				</div>
+				`;
+				collapse();
+				break;	
+			case 'generales': case 'general': case 'sistema':
+				document.getElementById("search_result_content").innerHTML = `<p><b>Comandos Generales</b></p>
+				<button type="button" class="collapsible">Comando sudo</button>
+				<div class="content">
+					<p>
+						Abreviatura de «SuperUser Do» (SuperUsuario hace), este comando te permite realizar tareas que requieren permisos administrativos o raíz. <br>
+						Sin embargo, no es aconsejable usar este comando para el uso diario, ya que podría ser fácil que ocurra un error si haces algo mal.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando df</button>
+				<div class="content">
+					<p>
+						Usa el comando df para obtener un informe sobre el uso del espacio en disco del sistema, que se muestra en porcentaje y KB. <br> 
+						Si deseas ver el informe en megabytes, escribe df -m.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando du</button>
+				<div class="content">
+					<p>
+						Si deseas verificar cuánto espacio ocupa un archivo o un directorio, el comando du (Uso del disco, en inglés) es la respuesta. <br>
+						Sin embargo, el resumen de uso del disco mostrará números de bloque de disco en lugar del formato de tamaño habitual. <br>
+						Si deseas verlo en bytes, kilobytes y megabytes, agrega el argumento -h a la línea de comando.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando jobs</button>
+				<div class="content">
+					<p>
+						El comando jobs mostrará todos los trabajos actuales junto con sus estados. Un trabajo es básicamente un proceso iniciado por el shell.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando kill</button>
+				<div class="content">
+					<p>
+						Si tienes un programa que no responde, puedes cerrarlo manualmente utilizando el comando kill. <br>
+						Enviará una cierta señal al programa que se está ejecutando mal y le indica a la aplicación que finalice. <br>
+						Hay un total de sesenta y cuatro señales que puedes usar, pero las personas generalmente solo usan dos señales: <br>
+						-SIGTERM (15): solicita que un programa deje de ejecutarse y te da algo de tiempo para guardar todo tu progreso. <br>
+						Si no especificas la señal al ingresar el comando kill, se utilizará esta señal. <br>
+						-SIGKILL (9): obliga a los programas a detenerse inmediatamente. El progreso no guardado se perderá.<br>
+						Además de conocer las señales, también debes conocer el número de identificación del proceso (PID) del programa que deseas 
+						detener (kill). Si no conoces el PID, simplemente ejecute el comando ps ux.<br>
+						Después de saber qué señal deseas usar y el PID del programa, ingresa la siguiente sintaxis:
+						<b>kill [opción de señal] PID.</b>
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando ping</button>
+				<div class="content">
+					<p>
+						Usa el comando ping para verificar tu estado de conectividad a un servidor. <br>
+						Por ejemplo, simplemente ingresando ping google.com, el comando verificará si puedes conectarte a Google y también medirá el tiempo de respuesta.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando wget</button>
+				<div class="content">
+					<p>
+						La línea de comandos de Linux es muy útil: incluso puedes descargar archivos de Internet con la ayuda del comando wget. <br>
+						Para hacerlo, simplemente escribe wget seguido del enlace de descarga.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando uname</button>
+				<div class="content">
+					<p>
+						El comando uname, abreviatura de Nombre de Unix, imprimirá información detallada sobre tu sistema Linux, como el nombre de la máquina, el sistema operativo, el núcleo, etc.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando top</button>
+				<div class="content">
+					<p>
+						Como un terminal equivalente al Administrador de tareas en Windows, el comando top mostrará una lista de los procesos en ejecución y la cantidad de CPU que utiliza cada proceso. <br>
+						Es muy útil monitorear el uso de los recursos del sistema, especialmente para saber qué proceso debe terminarse porque consume demasiados recursos.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando history</button>
+				<div class="content">
+					<p>
+						Cuando hayas estado utilizando Linux durante un cierto período de tiempo, notarás rápidamente que puedes ejecutar cientos de comandos todos los días. <br>
+						Como tal, ejecutar el comando history es particularmente útil si deseas revisar los comandos que ingresaste anteriormente.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando man</button>
+				<div class="content">
+					<p>
+						¿Confundido sobre la función de ciertos comandos de Linux? No te preocupes, puedes aprender fácilmente cómo usarlos directamente desde el shell de Linux mediante el comando man. <br> 
+						Por ejemplo, al ingresar <b> man tail </b> se mostrarán las instrucciones manuales del comando tail.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando zip, unzip</button>
+				<div class="content">
+					<p>
+						Usa el comando <b>zip</b> para comprimir tus archivos en un archivo zip y use el comando <b>unzip</b> para extraer los archivos comprimidos de un archivo zip.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando hostname</button>
+				<div class="content">
+					<p>
+						Si deseas conocer el nombre de tu host/red, simplemente escribe <b>hostname</b>. Agregar un <b>-I</b> al final mostrará la dirección IP de tu red.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando useradd, userdel</button>
+				<div class="content">
+					<p>
+						Dado que Linux es un sistema multiusuario, esto significa que más de una persona puede interactuar 
+						con el mismo sistema al mismo tiempo. <b>useradd</b> se usa para crear un nuevo usuario, mientras que <b>passwd</b> agrega una 
+						contraseña a la cuenta de ese usuario. Para agregar una nueva persona llamada John, escribe useradd John y luego para agregar 
+						su contraseña, escribe <b>passwd 123456789<b>.<br>
+						Eliminar un usuario es muy similar a agregar un nuevo usuario. Para eliminar la cuenta de usuario, escribe <b>userdel NombredeUsuario</b>
 					</p>
 				</div>
 				<button type="button" class="collapsible">Comando XXX</button>
@@ -186,16 +418,16 @@ function collapse (){
 				</div>
 				`;
 				collapse();
-				;
-				break;
-			case 'archivos':  case 'archivo':
-				document.getElementById("search_result_content").innerHTML = "Comandos para Archivos";
-				break;
-			case 'permisos': case 'permiso':
-				document.getElementById("search_result_content").innerHTML = "Comandos para Permisos";
 				break;	
 			default:
-				document.getElementById("search_result_content").innerHTML = "<b>Sin Resultados para: " + search_value + "</b>";
+				document.getElementById("search_result_content").innerHTML = "<b>Sin Resultados para: " + search_value + "</b>" + `<br> <br> <b>Busquedas disponibles: </b><br>
+				-<b>Carpeta</b><br>
+				-<b>Archivo</b><br>
+				-<b>Permisos</b><br>
+				-<b>Generales</b><br>
+				-<b>Sistema</b><br>
+				`;
+				collapse();
 				break;
 		}
 	}
