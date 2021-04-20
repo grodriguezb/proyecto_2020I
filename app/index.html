@@ -1,0 +1,205 @@
+<html>
+<head>
+  <title>Proyecto SistOpe 2021-I</title>
+</head>
+<style>
+h1{
+    color: black;
+    font-family: Candara;
+    font-weight: normal;
+	font-size: xx-large;
+} 
+p {
+    color: black;
+    font-family: Candara;
+    font-weight: normal;
+} 
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+</style>
+
+<body>
+<div align="Left">
+<h1 align="center">Comando Basicos para Linux</h1>
+<p id="banner"></p>
+	<script>
+		function getName(){
+			var name = prompt("Bienvenido/a, cual es su nombre?");
+			while (!name) {
+				alert('Su nombre no debe ser nulo');
+				name = prompt("Bienvenido/a, cual es su nombre?");
+			}
+			while (name.length <= 4) {
+				alert('Longitud minima de nombre, deben contener mas de 4 caracteres');
+				name = prompt("Bienvenido/a, cual es su nombre?");
+			}
+			document.getElementById("banner").innerHTML =  "Bienvenido/a " + name +", utilice el cuadro de busqueda, para buscar un comando linux";
+		}
+		getName();
+	</script>
+</div>
+
+
+<input type="text" id="search_value" size="20" name="search_value"><br>
+<button onclick="search()">Buscar Comandos</button>
+<br>
+<p id="search_result_content"></p>
+
+
+<script>
+function collapse (){
+	var coll = document.getElementsByClassName("collapsible");
+	var i;
+
+	for (i = 0; i < coll.length; i++) {
+	coll[i].addEventListener("click", function() {
+		this.classList.toggle("active");
+		var content = this.nextElementSibling;
+		if (content.style.display === "block") {
+		content.style.display = "none";
+		} else {
+		content.style.display = "block";
+		}
+	});
+	}
+}	
+
+
+
+	function search() {
+	var search_value = document.getElementById("search_value").value.toLowerCase();
+	//alert(search_value);
+		switch(search_value) {
+			case 'carpeta': case 'carpetas':				
+				document.getElementById("search_result_content").innerHTML = `
+				<p><b>Comandos para Carpetas</b></p>
+				<button type="button" class="collapsible">Comando pwd</button>
+				<div class="content">
+					<p>
+						Usa el comando pwd para encontrar la ruta del directorio (carpeta) de trabajo actual en el que te encuentras. <br>
+						El comando devolverá una ruta absoluta (completa), que es básicamente una ruta de todos los directorios que comienzan con una barra diagonal (/).<br>
+						Un ejemplo de una ruta absoluta es /home/nombredeusuario.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando cd</button>
+				<div class="content">
+					<p>
+						Para navegar por los archivos y directorios de Linux, usa el comando cd. <br>
+						Te pedirá la ruta completa o el nombre del directorio, dependiendo del directorio de trabajo actual en el que te encuentres. <br>
+						Supongamos que estás en /home/nombredeusuario/Documentos y deseas ir a Fotos, un subdirectorio de Documentos. <br>
+						Para hacerlo, simplemente escribe el siguiente comando: cd Fotos. Otro escenario es si deseas ir a un directorio completamente nuevo, por ejemplo,
+						/home/nombredeusuario/Peliculas. En este caso, debes escribir cd seguido de la ruta absoluta del directorio: cd /home/ nombredeusuario/Peliculas.<br>
+						Hay algunos atajos para ayudarte a navegar rápidamente: cd .. (con dos puntos) para ir un directorio hacia arriba cd para ir directamente a la carpeta de inicio cd- 
+						(con un guión) para ir al directorio anterior Como nota al margen, el shell de Linux distingue entre mayúsculas y minúsculas. Por lo tanto, debes escribir el nombre 
+						del directorio de forma exacta.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando ls</button>
+				<div class="content">
+					<p>
+						El comando ls se usa para ver el contenido de un directorio. Por defecto, este comando mostrará el contenido de tu directorio de trabajo actual.<br>
+						Si deseas ver el contenido de otros directorios, escribe ls y luego la ruta del directorio. Por ejemplo, ingresa ls/home/nombredeusuario/Documentos para ver el contenido de Documentos.<br>
+						Hay variaciones que puedes usar con el comando ls:<br>
+						ls -R también listará todos los archivos en los subdirectorios<br>
+						ls -a mostrará los archivos ocultos<br>
+						ls -al listará los archivos y directorios con información detallada como los permisos, el tamaño, el propietario, etc.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando cat</button>
+				<div class="content">
+					<p>
+						cat (abreviatura de concatenate, en inglés) es uno de los comandos más utilizados en Linux. <br>
+						Se utiliza para listar el contenido de un archivo en la salida estándar (sdout). Para ejecutar este comando, escribe cat seguido del nombre del archivo y su extensión. <br>
+						Por ejemplo: cat archivo.txt.<br>
+						Aquí hay otras formas de usar el comando cat:<br>
+						cat > nombredearchivo crea un nuevo archivo.<br>
+						cat nombredearchivo1 nombredearchivo2>nombredearchivo3 une dos archivos (1 y 2) y almacena la salida de ellos en un nuevo archivo (3)<br>
+						convertir un archivo a mayúsculas o minúsculas, cat nombredearchivo | tr a-z A-Z> salida.txt<br>
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando cp</button>
+				<div class="content">
+					<p>
+						Usa el comando cp para copiar archivos del directorio actual a un directorio diferente. <br>
+						Por ejemplo, el comando cp escenario.jpg /home/nombredeusuario/Imagenes crearía una copia de escenario.jpg (desde tu directorio actual) en el directorio de Imagenes.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando mkdir</button>
+				<div class="content">
+					<p>
+						Usa el comando mkdir para crear un nuevo directorio: si escribes mkdir Musica, creará un directorio llamado Musica.<br>
+						También hay comandos adicionales de mkdir:<br>
+						Para generar un nuevo directorio dentro de otro directorio, usa este comando básico de Linux mkdir Musica/Nuevoarchivo<br>
+						Usa la opción p (padres) para crear un directorio entre dos directorios existentes. Por ejemplo, mkdir -p Musica/2020/Nuevoarchivo creará el nuevo archivo «2020».
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando mv</button>
+				<div class="content">
+					<p>
+						El uso principal del comando mv es mover archivos, aunque también se puede usar para cambiar el nombre de los archivos.<br>
+						Los argumentos en mv son similares al comando cp. Debes escribir mv, el nombre del archivo y el directorio destino. Por ejemplo: mv archivo.txt /home/nombredeusuario/Documentos.<br>
+						Para cambiar el nombre de los archivos, el comando de Linux es mv nombreviejo.ext nombrenuevo.ext
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando rmdir</button>
+				<div class="content">
+					<p>
+						Si necesitas eliminar un directorio, usa el comando rmdir. Sin embargo, rmdir solo te permite eliminar directorios vacíos.
+					</p>
+				</div>
+				<button type="button" class="collapsible">comando rm</button>
+				<div class="content">
+					<p>
+						El comando rm se usa para eliminar directorios y el contenido dentro de ellos. Si solo deseas eliminar el directorio, como alternativa a rmdir, usa rm -r.<br>
+						<b>Nota:</b> Ten mucho cuidado con este comando y verifica en qué directorio te encuentras. Este comando elimina todo y no se puede deshacer.
+					</p>
+				</div>
+				<button type="button" class="collapsible">Comando XXX</button>
+				<div class="content">
+					<p>
+						Info Will be Here
+					</p>
+				</div>
+				`;
+				collapse();
+				;
+				break;
+			case 'archivos':  case 'archivo':
+				document.getElementById("search_result_content").innerHTML = "Comandos para Archivos";
+				break;
+			case 'permisos': case 'permiso':
+				document.getElementById("search_result_content").innerHTML = "Comandos para Permisos";
+				break;	
+			default:
+				document.getElementById("search_result_content").innerHTML = "<b>Sin Resultados para: " + search_value + "</b>";
+				break;
+		}
+	}
+</script>
+
+</body>
+</html>
