@@ -1,5 +1,5 @@
 {
-  "name": "aci-helloworld",
+  "name": "proyecto_2021_I",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,5 +8,5 @@
     "morgan": "^1.8.2"
   },
   "devDependencies": {},
-  "author": ""
+  "author": "grodriguez"
 }
