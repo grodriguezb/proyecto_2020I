@@ -67,7 +67,7 @@ button {
 <body>
 <div align="Left">
 <h1 align="center">Comandos Básicos para Linux</h1>
-<h2><p id="banner"></p></h2>
+<h2><p id="banner_2"></p> <p id="banner"></p></h2>
 	<script>
 		function getName(){
 			var name = prompt("Bienvenido/a, cual es su nombre?");
@@ -79,11 +79,16 @@ button {
 				alert('Longitud minima de nombre, deben contener mas de 4 caracteres');
 				name = prompt("Bienvenido/a, cual es su nombre?");
 			}
-			document.getElementById("banner").innerHTML =  name +", utilice el campo de texto para ingresar un valor de consulta para ver algunos de lo comandos mas comunes para Linux";
+			document.getElementById("banner").innerHTML =  '<b>' + name +"</b>, utilice el campo de texto para ingresar un valor de consulta para ver algunos de lo comandos mas comunes para Linux";
+			document.getElementById("banner_2").innerHTML = '<b>' + name + '</b>, si desea saber sobre sincronizacion de procesos, haga <a href="sincronizacion_procesos.html">click aqui</a>';
 		}
 		getName();
 	</script>
 </div>
+
+<h2>
+	
+</h2>
 
 <input type="text" id="search_value" size="20" name="search_value"><br>
 <button onclick="search()">Buscar Comandos</button><br>
